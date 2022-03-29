@@ -5,9 +5,13 @@ jobs:
       - image: bmonkman/node-flutter
       # - image: noland/flutter-circleci-demo:v1
     steps:
+      - checkout
       - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline!'
-            flutter --version
+          name: Check Flutter Version
+          command: flutter doctor
+      - run:
+          name: List Repo Directory
+          command: ls -lha
+      - run:
+          name: Run Unit Tests
+          command: flutter test
