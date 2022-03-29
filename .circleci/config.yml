@@ -10,8 +10,5 @@ jobs:
           name: Check Flutter Version
           command: flutter doctor
       - run:
-          name: List Repo Directory
-          command: ls -lha
-      - run:
           name: Run Unit Tests
           command: flutter test
