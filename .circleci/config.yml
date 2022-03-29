@@ -6,8 +6,8 @@ orbs:
 jobs:
   build:
     docker:
-      - image: bmonkman/node-flutter
-      # - image: noland/flutter-circleci-demo:v1
+      # - image: bmonkman/node-flutter
+      - image: noland/flutter-circleci-demo:v3
     steps:
       - browser-tools/install-chrome:
           chrome-version: 99.0.4844.74
@@ -26,3 +26,6 @@ jobs:
       - run:
           name: Run Integration Tests
           command: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d web-server
+      - run:
+          name: Check Firebase Version
+          command: firebase --version && firebase login:list && firebase projects:list
