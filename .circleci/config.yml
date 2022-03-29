@@ -9,10 +9,12 @@ jobs:
       - image: bmonkman/node-flutter
       # - image: noland/flutter-circleci-demo:v1
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome:
+          chrome-version: 99.0.4844.74
+      - browser-tools/install-chromedriver
       - checkout
       - run:
-          name: Check Flutter Version
+          name: Print flutter doctor
           command: flutter doctor
       - run:
           name: Run Unit Tests
