@@ -21,7 +21,8 @@ jobs:
           command: flutter test
       - run:
           name: Start Chrome driver process
-          command: chromedriver --port=4444 &
+          command: chromedriver --port=4444
+          background: true
       - run:
           name: Run Integration Tests
           command: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d web-server
