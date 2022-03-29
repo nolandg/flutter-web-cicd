@@ -1,10 +1,15 @@
 version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
+
 jobs:
   build:
     docker:
       - image: bmonkman/node-flutter
       # - image: noland/flutter-circleci-demo:v1
     steps:
+      - browser-tools/install-browser-tools
       - checkout
       - run:
           name: Check Flutter Version
