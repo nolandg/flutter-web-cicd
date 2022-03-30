@@ -29,3 +29,5 @@ jobs:
       - run:
           name: Check Firebase Version
           command: firebase --version && firebase login:list && firebase projects:list
+      - store_artifacts:
+          path: /tmp/screenshots

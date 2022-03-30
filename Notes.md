@@ -6,3 +6,15 @@ Integration test instructions: https://docs.flutter.dev/cookbook/testing/integra
 Firebase CI login: https://firebase.google.com/docs/cli#cli-ci-systems
 
 Custom Circleci images: https://circleci.com/docs/2.0/custom-images/
+Ciurcle env vars: https://circleci.com/docs/2.0/env-vars/
+
+// Flutter web integration testing is in the weeds: https://github.com/flutter/flutter/issues/86985
+cloned repo locally
+git checkout tags/2.10.4 -b fix-screenshots
+make fix and push
+update pubspec
+  integration_test:
+    git:
+      url: https://github.com/nolandg/flutter
+      path: packages/integration_test
+      ref: fix-screenshots
