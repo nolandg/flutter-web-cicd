@@ -42,7 +42,7 @@ jobs:
       # Test the dev build with its instrumentation
       - run:
           name: Run Unit Tests
-          command: flutter test
+          command: flutter test --coverage
       - run:
           name: Start Chrome driver process
           command: chromedriver --port=4444 && true
@@ -50,14 +50,18 @@ jobs:
       - run:
           name: Run Integration Tests
           command: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d web-server
-      - store_artifacts:
-          path: /tmp/screenshots
+
       # Can't find a way to kill background process without making red error step in Circleci
-      - run:
-          name: Kill Chromedriver Background Process
-          command: kill -SIGINT $(pgrep chromedriver)
+    #   - run:
+    #       name: Kill Chromedriver Background Process
+    #       command: kill -SIGINT $(pgrep chromedriver)
 
       # Deploy to Production
       - run:
           name: Deploy Firebase Production Project
           command: firebase -P ${FIREBASE_PRODUCTION_PROJECT} deploy
+      # Save artifacts
+      - store_artifacts:
+          path: /tmp/screenshots
+      - store_artifacts:
+          path: coverage

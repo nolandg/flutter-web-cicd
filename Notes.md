@@ -31,5 +31,8 @@ firebase hosting:
 To Think about:
   - We're testing a debug build with test instrumentation, never testing production build
   - Put firebase stuff in sub dir, too messy especially with node_modules
-  - 
+
+
+
+Coverage: vscode extension
 
