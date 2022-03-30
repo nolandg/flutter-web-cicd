@@ -18,3 +18,16 @@ update pubspec
       url: https://github.com/nolandg/flutter
       path: packages/integration_test
       ref: fix-screenshots
+
+
+firebase init
+
+firebase hosting:
+ "hosting": {
+    "public": "build/web", <----- !
+
+
+
+To Think about:
+  - We're testing a debug build with test instrumentation, never testing production build
+

@@ -6,13 +6,15 @@ orbs:
 jobs:
   build:
     docker:
-      # - image: bmonkman/node-flutter
       - image: noland/flutter-circleci-demo:v3
     steps:
       - browser-tools/install-chrome:
           chrome-version: 99.0.4844.74
       - browser-tools/install-chromedriver
       - checkout
+      -run:
+          name: Install CI/CD Script Deps
+          command: cd cicd && npm install
       - run:
           name: Print flutter doctor
           command: flutter doctor
@@ -20,14 +22,26 @@ jobs:
           name: Run Unit Tests
           command: flutter test
       - run:
+          name: Check Firebase CLI Connection
+          command: firebase --version && firebase projects:list
+      - run:
+          name: Deploy Firebase Test Project
+          command: firebase -P ${FIREBASE_TEST_PROJECT} deploy --only functions --only firestore --only storage
+      - run:
+          name: Prepare Firestore Test Project
+          command: node ./cicd/cicd.js prep-test-env
+      - run:
           name: Start Chrome driver process
           command: chromedriver --port=4444
           background: true
       - run:
           name: Run Integration Tests
           command: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d web-server
-      - run:
-          name: Check Firebase Version
-          command: firebase --version && firebase login:list && firebase projects:list
       - store_artifacts:
           path: /tmp/screenshots
+      -run:
+          name: Build for Production
+          command: flutter build web
+      - run:
+          name: Deploy Firebase Production Project
+          command: firebase -P ${FIREBASE_PRODUCTION_PROJECT} deploy

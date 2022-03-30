@@ -14,10 +14,8 @@ void main() {
 
       // Verify the counter starts at 0.
       expect(find.text('0'), findsOneWidget);
-
       // Take screenshot
-      await tester.pumpAndSettle();
-      await binding.takeScreenshot('screenshot-0');
+      await binding.takeScreenshot('pre-increment');
 
       // Finds the floating action button to tap on.
       final Finder fab = find.byTooltip('Increment');
@@ -30,10 +28,8 @@ void main() {
 
       // Verify the counter increments by 1.
       expect(find.text('1'), findsOneWidget);
-
       // Take screenshot
-      await tester.pumpAndSettle();
-      await binding.takeScreenshot('screenshot-1');
+      await binding.takeScreenshot('post-increment');
     });
   });
 }
