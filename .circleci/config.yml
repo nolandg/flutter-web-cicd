@@ -13,6 +13,9 @@ jobs:
       - browser-tools/install-chromedriver
       - checkout
       - run:
+          name: Install Firebase Deps
+          command: cd functions && npm install
+      - run:
           name: Install CI/CD Script Deps
           command: cd cicd && npm install
       - run:
@@ -39,6 +42,9 @@ jobs:
           command: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d web-server
       - store_artifacts:
           path: /tmp/screenshots
+      - run:
+          name: Kill Chromedriver Background Process
+          command: kill $(pgrep chromedriver)
       - run:
           name: Build for Production
           command: flutter build web
