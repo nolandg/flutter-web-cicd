@@ -29,7 +29,7 @@ jobs:
           command: firebase --version && firebase projects:list
       - run:
           name: Deploy Firebase Test Project
-          command: firebase -P ${FIREBASE_TEST_PROJECT} deploy --only functions --only firestore --only storage
+          command: firebase -P ${FIREBASE_TEST_PROJECT} deploy
       - run:
           name: Prepare Firestore Test Project
           command: node ./cicd/cicd.js prep-test-env
@@ -44,7 +44,7 @@ jobs:
           path: /tmp/screenshots
       - run:
           name: Kill Chromedriver Background Process
-          command: kill $(pgrep chromedriver)
+          command: kill -SIGINT $(pgrep chromedriver)
       - run:
           name: Build for Production
           command: flutter build web
