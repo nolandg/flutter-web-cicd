@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: noland/flutter-circleci-demo:v3
     steps:
+       # Deps and tools
       - browser-tools/install-chrome:
           chrome-version: 99.0.4844.74
       - browser-tools/install-chromedriver
@@ -22,17 +23,26 @@ jobs:
           name: Print flutter doctor
           command: flutter doctor
       - run:
-          name: Run Unit Tests
-          command: flutter test
-      - run:
           name: Check Firebase CLI Connection
           command: firebase --version && firebase projects:list
+
+      # Check that it even builds in production before running tests. Also needed to create output directory for future steps
+      - run:
+          name: Build for Production
+          command: flutter build web
+
+      # Setup test environment Firebase project
       - run:
           name: Deploy Firebase Test Project
           command: firebase -P ${FIREBASE_TEST_PROJECT} deploy
       - run:
           name: Prepare Firestore Test Project
           command: node ./cicd/cicd.js prep-test-env
+
+      # Test the dev build with its instrumentation
+      - run:
+          name: Run Unit Tests
+          command: flutter test
       - run:
           name: Start Chrome driver process
           command: chromedriver --port=4444
@@ -44,10 +54,9 @@ jobs:
           path: /tmp/screenshots
       - run:
           name: Kill Chromedriver Background Process
-          command: kill -SIGINT $(pgrep chromedriver)
-      - run:
-          name: Build for Production
-          command: flutter build web
+          command: kill -SIGINT $(pgrep chromedriver) # not using SIGINT causes Circleci to see it as a failure
+
+      # Deploy to Production
       - run:
           name: Deploy Firebase Production Project
           command: firebase -P ${FIREBASE_PRODUCTION_PROJECT} deploy
