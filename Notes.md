@@ -32,7 +32,7 @@ To Think about:
   - We're testing a debug build with test instrumentation, never testing production build
   - Put firebase stuff in sub dir, too messy especially with node_modules
 
-
+this don't work for web: https://stackoverflow.com/questions/59028609/how-to-find-if-we-are-running-unit-test-in-dart-flutter/59028868
 
 Coverage: vscode extension
 
