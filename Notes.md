@@ -36,3 +36,6 @@ this don't work for web: https://stackoverflow.com/questions/59028609/how-to-fin
 
 Coverage: vscode extension
 
+hard: widget testing because of HTTP access and assets etc.
+
+Flutterfire tooling is getting better fast

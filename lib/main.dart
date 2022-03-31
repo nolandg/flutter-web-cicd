@@ -1,9 +1,19 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cicd_tutorial/IntroBlurb.dart';
+import 'package:cicd_tutorial/PostsList.dart';
+import 'package:cicd_tutorial/auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutterfire_ui/auth.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -48,17 +58,49 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         backgroundColor: const Color.fromRGBO(254, 106, 184, 1),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const IntroBlurb(),
-            Image.memory(logoBytes, height: 100),
-            const SizedBox(height: 50),
-            const Text('You have pushed the button this many times:'),
-            Text('$_counter', style: Theme.of(context).textTheme.headline4),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Image.memory(logoBytes, height: 100),
+          const IntroBlurb(),
+          const AuthStatus(),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Container(
+                  width: 600,
+                  height: 400,
+                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.all(20),
+                  child: const SignInScreen(
+                    providerConfigs: [
+                      EmailProviderConfiguration(),
+                      GoogleProviderConfiguration(clientId: '737150762289-dgrkm8i9rnh5d03fm51tuk9pddoim9hd.apps.googleusercontent.com')
+                    ],
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 32),
+                    Text('Posts:', style: Theme.of(context).textTheme.displaySmall),
+                    const SizedBox(height: 16),
+                    PostsList(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const Text('You have pushed the button this many times:'),
+          Text('$_counter', style: Theme.of(context).textTheme.headline4),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

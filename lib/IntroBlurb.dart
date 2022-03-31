@@ -15,7 +15,7 @@ class IntroBlurb extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           children: [
-            TextSpan(text: 'This app is part of a project demonstrating CI/CD for Flutter + Firebase web apps (PWAs). This is a Hackathon Onboarding Project (HOP) for ', style: textStyle),
+            TextSpan(text: 'This app is part of a project demonstrating CI/CD for Flutter + Firebase web apps (PWAs).\nThis is a Hackathon Onboarding Project (HOP) for ', style: textStyle),
             TextSpan(
               text: 'commit.dev',
               recognizer: TapGestureRecognizer()
