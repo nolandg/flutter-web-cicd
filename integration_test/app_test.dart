@@ -22,7 +22,6 @@ void main() {
 
       // Verify the counter starts at 0.
       expect(find.text('0'), findsOneWidget);
-      // Take screenshot
       await binding.takeScreenshot('pre-increment');
 
       // Finds the floating action button to tap on.
@@ -36,7 +35,6 @@ void main() {
 
       // Verify the counter increments by 1.
       expect(find.text('1'), findsOneWidget);
-      // Take screenshot
       await binding.takeScreenshot('post-increment');
 
       // Ensure we can't see posts
@@ -60,6 +58,8 @@ void main() {
 
       // Ensure we can now see posts
       expect(find.text('The First Post'), findsOneWidget);
+
+      await binding.takeScreenshot('authenticated');
 
       await tester.pumpAndSettle();
       await tester.pump(const Duration(milliseconds: 5000));
