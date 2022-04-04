@@ -9,15 +9,22 @@ Custom Circleci images: https://circleci.com/docs/2.0/custom-images/
 Ciurcle env vars: https://circleci.com/docs/2.0/env-vars/
 
 // Flutter web integration testing is in the weeds: https://github.com/flutter/flutter/issues/86985
-cloned repo locally
-git checkout tags/2.10.4 -b fix-screenshots
-make fix and push
-update pubspec
-  integration_test:
-    git:
-      url: https://github.com/nolandg/flutter
-      path: packages/integration_test
-      ref: fix-screenshots
+git repository
+How to use your fork as a Flutter dep:
+1. Fork and clone repo
+2. Checkout the exact tag you're using: `git checkout tags/2.10.4 -b fix-screenshots`
+3. Make the fix, commit, and push
+4. Update `pubspec.yaml` to reference the fixed branch of your fork:
+    ```yaml
+        dev_dependencies:
+          flutter_test:
+            sdk: flutter
+          integration_test:
+            git:
+              url: https://github.com/nolandg/flutter
+              path: packages/integration_test
+              ref: fix-screenshots
+    ```
 
 
 firebase init

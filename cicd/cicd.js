@@ -13,7 +13,7 @@ program.command('prep-test-env')
     await prepTestEnv();
   });
 
-  // Get Firestore credentials either from local file (local development) or env var (CI/CD environment)
+// Get Firestore credentials either from local file (local development) or env var (CI/CD environment)
 let devAdminKeyTestFilePath = './firebase_admin_key_test.json';
 let adminKeyTest;
 

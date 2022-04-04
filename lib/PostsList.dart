@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
 class PostsList extends StatelessWidget {
-  PostsList({Key? key}) : super(key: key);
+  const PostsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:cicd_tutorial/IntroBlurb.dart';
 import 'package:cicd_tutorial/PostsList.dart';
 import 'package:cicd_tutorial/auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutterfire_ui/auth.dart';
